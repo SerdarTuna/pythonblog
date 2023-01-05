@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}New Post{% endblock %}</h1>
+{% endblock %}
+
+{% block carousel %}{% endblock %}
+
+{% block content %}
+  <form method="post">  
+    <div class="mb-3">
+    <label for="title" class="form-label">Email address</label>
+    <input name="title" class="form-control" id="title" placeholder="Blog title" value="{{ request.form['title'] }}" required>
+  </div>
+  <div class="mb-3">
+    <label for="body" class="form-label">Content</label>
+    <textarea name="body" class="form-control" id="body" rows="3">{{ request.form['body'] }}</textarea><br />
+    <input type="submit" class="btn btn-success" value="Save">
+  </div>
+  </form>
+{% endblock %}

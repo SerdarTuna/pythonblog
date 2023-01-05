@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Posts{% endblock %}</h1>
+  {% if g.user %}
+    <a class="action" href="{{ url_for('blog.create') }}">New</a>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  {% for post in posts %}
+
+    <div class="col-4">
+      <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+
+      <h2 class="fw-normal">{{ post['title'] }}</h2>
+      <div class="about">by {{ post['username'] }} on {{ post['created'].strftime('%Y-%m-%d') }}</div><br />
+      <p>{{ post['body'] }}</p>
+      <p><a class="btn btn-secondary" href="#">Detayları incele &raquo;</a></p>      
+      {% if g.user['id'] == post['author_id'] %}
+      <p><a class="btn btn-secondary" href="{{ url_for('blog.update', id=post['id']) }}">Düzenle</a></p>
+      {% endif %}
+    </div><!-- /.col-lg-4 -->
+
+
+  {% endfor %}
+{% endblock %}
